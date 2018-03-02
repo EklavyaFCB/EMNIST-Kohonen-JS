@@ -16,14 +16,18 @@ var size = 336; // Width and height of canvas
 var gridOn = true;
 var xArr = []; // Store x values
 var yArr = []; // Store y values
+var parentCanvas;
+var offsetL;
+var offsetT;
 
 // Functions
 
-// Trigger function
 function setUp() {
   // Elements
   ctx = document.getElementById('myCanvas').getContext("2d");
-  // ctx2 = document.getElementById('myCanvas2').getContext("2d");
+  if (typeof ctx2 !== 'undefined') {
+    ctx2 = document.getElementById('myCanvas2').getContext("2d");
+  }
   info = document.getElementById('status');
   drawable = false;
   drawGrid();
@@ -33,14 +37,26 @@ function setUp() {
   $('#myCanvas').mousedown(function(e) {
     drawable = true;
     info.innerHTML = "Drawing";
-    drawLine(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
+
+    // Correct offsets because of bootstrap's col-lg-8 offset-lg-2
+    var offsetL = this.offsetLeft + $(this).parent().offset().left - 15;
+    var offsetT = this.offsetTop + $(this).parent().offset().top;
+
+    // drawLine(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
+    drawLine(e.pageX - offsetL, e.pageY - offsetT, false);
   });
 
   // Mouse moves in canvas
   $('#myCanvas').mousemove(function(e) {
     if (drawable) {
       info.innerHTML = "Drawing";
-      drawLine(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+
+      // Correct offsets because of bootstrap's col-lg-8 offset-lg-2
+      var offsetL = this.offsetLeft + $(this).parent().offset().left - 15;
+      var offsetT = this.offsetTop + $(this).parent().offset().top;
+
+      // drawLine(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
+      drawLine(e.pageX - offsetL, e.pageY - offsetT, true);
     }
   });
 
@@ -53,7 +69,7 @@ function setUp() {
   // Mouse leaves the canvas
   $('#myCanvas').mouseleave(function(e) {
     drawable = false;
-    info.innerHTML = "Drawn";
+    info.innerHTML = "Press submit to cluster";
   });
 }
 
@@ -61,7 +77,11 @@ function setUp() {
 function clearCanvas(callType) {
   
   ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-  ctx2.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  
+  if (typeof ctx2 !== 'undefined') {
+    ctx2.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  }
+
   xArr = [];
   yArr = [];
   
@@ -120,8 +140,8 @@ function drawGrid() {
       ctx.lineWidth = 0;
     }
 
-    ctx.closePath(); 
-    ctx.stroke()
+    ctx.closePath();
+    ctx.stroke();
 
     gridOn = !gridOn;
   
@@ -133,14 +153,13 @@ function reDraw() {
   ctx2.lineJoin = "round";
   ctx2.lineWidth = 20;
 
-  ctx2.beginPath();
-  ctx2.moveTo(xArr[0], yArr[0]);
-  for (var i=0; i<(xArr.length); i++) {
+  for (var i=0; i<xArr.length; i++) {
+    ctx2.beginPath();
+    ctx2.moveTo(xArr[i-1], yArr[i-1]);
     ctx2.lineTo(xArr[i],yArr[i]);
-    console.log(xArr[i],yArr[i])
+    ctx2.closePath();
+    ctx2.stroke();
   }
-  ctx2.stroke();
-  ctx2.closePath(); 
 }
 
 /*function drawTable() {
@@ -162,5 +181,7 @@ function reDraw() {
 // Submit input
 function carry() {
   info.innerHTML = "Submitted";
-  //reDraw();
+  if (typeof ctx2 !== 'undefined') {
+    reDraw();
+  }
 }

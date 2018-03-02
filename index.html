@@ -47,7 +47,7 @@ Username: u5es2
 
 		<div class="fixed-top">
 			<nav class="navbar fixed-top bg-success">
-			  <a class="nav-item nav-link active" a style="color:white" href="/">Home</a>
+			  <a class="nav-item nav-link active" a style="color:white" href="index.html">Home</a>
 			  <a class="nav-item" a style="color:white"><b>Kohonen Self-Organising Maps</b></a>
 			  <a class="nav-item nav-link" a style="color:white" href="about.html">About</a>
 			</nav>
@@ -62,37 +62,31 @@ Username: u5es2
 		    </div>-->
 
 		    <div class="main">
-			    <!--<img src="static/images/Net1.png" alt="BackgroundNet" height="1240" width="1754">-->
-
 				    <div class="col-lg-8 offset-lg-2">
-				    <!--<div class="home-container">-->
-					    	<!--<div class="explanation">Kohonen's SOM is a type of artificial neural network that is trained using unsupervised learning to produce a low-dimensional, discretised representation of the input space of the training samples, called a map, and is therefore a method to do dimensionality reduction.</div>-->
-					    	<div class="canvas">
-								<canvas id="myCanvas" width="336" height="336"></canvas>
-								<!--<canvas id="myCanvas2" width="336" height="336"></canvas>-->
-							</div>
+				    	<!--<div class="explanation">Kohonen's SOM is a type of artificial neural network that is trained using unsupervised learning to produce a low-dimensional, discretised representation of the input space of the training samples, called a map, and is therefore a method to do dimensionality reduction.</div>-->
+				    	<div class="canvas" id="parentCanvas">
+							<canvas id="myCanvas" width="336" height="336"></canvas>
+							<!--<canvas id="myCanvas2" width="336" height="336"></canvas>-->
+						</div>
 
-							<div class="guide">
-								Draw in the box above to cluster.
-							</div>
+						<div class="guide">
+							<a id="status">Draw in the box above</a>
+						</div>
 
-							<div id="reactiveInfo">
-								<form id="setupForm" style="text-align:center;">
-									<input type="button" class="btn btn-outline-info btn-sm" value="Grid" onclick="drawGrid()">
-									<input type="button" class="btn btn-outline-success btn-sm" value="Carry" onclick="carry()">
-									<input type="button" class="btn btn-outline-warning btn-sm" value="Clear" onclick="clearCanvas(0)">
-									<a id="status"></a>
-								</form>
-							</div>
+						<div id="reactiveInfo">
+							<form id="setupForm" style="text-align:center;">
+								<input type="button" class="btn btn-outline-info btn-sm" value="Grid" onclick="drawGrid()">
+								<input type="button" class="btn btn-outline-success btn-sm" value="Carry" onclick="carry()">
+								<input type="button" class="btn btn-outline-warning btn-sm" value="Clear" onclick="clearCanvas(0)"> 
+							</form>
+						</div>
 
-							<div class="links">
-								<button type="button" class="btn btn-info btn-lg">View Examples</button>
-								<button type="button" class="btn btn-success btn-lg">Learn More</button>
-								<button type="button" class="btn btn-warning btn-lg"><a style="color:white" href="dataset.html">View Dataset</a></button>
-							</div>
+						<div class="links">
+							<button type="button" class="btn btn-info btn-lg">View Examples</button>
+							<button type="button" class="btn btn-success btn-lg">Learn More</button>
+							<button type="button" class="btn btn-warning btn-lg"><a style="color:white" href="dataset.html">View Dataset</a></button>
+						</div>
 					</div>
-
-				<!--<div id="particles-js"></div>-->
 		    </div>
 
 			<!--<nav aria-label="Page navigation example">

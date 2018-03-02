@@ -50,13 +50,13 @@ b, strong{
   background-image: url("/static/images/Net2.png");
   background-repeat: no-repeat, repeat;
   background-size: cover;
-}*/
+}
 
 .home-container {
     margin: 0 auto;
     margin: 0 auto;
     width: 800px;
-}
+}*/
 
 /* NAV */
 .navbar {
@@ -107,31 +107,23 @@ b, strong{
 
 .canvas {
   padding-top: 250px;
+  width: 100%;
+  height: auto;
 }
 
 #myCanvas {
-  /*display:inline-block;*/
   display: block;
   margin: auto;
   background: #ffe4ce;
   border: 1px solid #000000;
 }
 
-/*#myCanvas2 {
-  display:inline-block;
+#myCanvas2 {
+  display: block;
   margin: auto;
   background: #ffe4ce;
   border: 1px solid #000000;
 }
-
-
-#particles-js { 
-  background-color: #fff2e7;
-  background-repeat: no-repeat;
-  background-size: cover;*/
-  /*background-position: 50% 50%;*/
-  /*display: block;
-}*/
 
 .guide {
   text-align: center;
