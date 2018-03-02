@@ -24,19 +24,23 @@ var offsetT;
 
 function setUp() {
   // Elements
-  ctx = document.getElementById('myCanvas').getContext("2d");
+  canvas = document.getElementById('myCanvas');
+  ctx = canvas.getContext('2d');
+
   if (typeof ctx2 !== 'undefined') {
-    ctx2 = document.getElementById('myCanvas2').getContext("2d");
+    ctx2 = document.getElementById('myCanvas2').getContext('2d');
   }
+
   info = document.getElementById('status');
   drawable = false;
   drawGrid();
   //drawTable();
 
+  /* --- MOUSE EVENTS --- */
   // Mouse button pressed
   $('#myCanvas').mousedown(function(e) {
     drawable = true;
-    info.innerHTML = "Drawing";
+    info.innerHTML = 'Drawing';
 
     // Correct offsets because of bootstrap's col-lg-8 offset-lg-2
     var offsetL = this.offsetLeft + $(this).parent().offset().left - 15;
@@ -49,7 +53,7 @@ function setUp() {
   // Mouse moves in canvas
   $('#myCanvas').mousemove(function(e) {
     if (drawable) {
-      info.innerHTML = "Drawing";
+      info.innerHTML = 'Drawing';
 
       // Correct offsets because of bootstrap's col-lg-8 offset-lg-2
       var offsetL = this.offsetLeft + $(this).parent().offset().left - 15;
@@ -63,14 +67,73 @@ function setUp() {
   // Mouse button released
   $('#myCanvas').mouseup(function(e) {
     drawable = false;
-    info.innerHTML = "Drawn";
+    info.innerHTML = 'Drawn';
   });
 
   // Mouse leaves the canvas
   $('#myCanvas').mouseleave(function(e) {
     drawable = false;
-    info.innerHTML = "Press submit to cluster";
+    info.innerHTML = 'Press submit to cluster';
   });
+
+
+  /* --- TOUCH EVENTS --- */
+  
+  // Touch Start
+  canvas.addEventListener('touchstart', function (e) {
+    mousePos = getTouchPos(canvas, e);
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent('mousedown', {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+  }, false);
+  
+  // Touch End
+  canvas.addEventListener('touchend', function (e) {
+    var mouseEvent = new MouseEvent('mouseup', {});
+    canvas.dispatchEvent(mouseEvent);
+  }, false);
+  
+  // Touch Move
+  canvas.addEventListener('touchmove', function (e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent('mousemove', {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+  }, false);
+
+  // Get the position of a touch relative to the canvas
+  function getTouchPos(canvasDom, touchEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+      x: touchEvent.touches[0].clientX - rect.left,
+      y: touchEvent.touches[0].clientY - rect.top
+    };
+  }
+
+  // Prevent unintended touch scroll
+  document.body.addEventListener("touchstart", function (e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  }, false);
+
+  document.body.addEventListener("touchend", function (e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  }, false);
+  
+  document.body.addEventListener("touchmove", function (e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  }, false);
+
 }
 
 // Clear canvas

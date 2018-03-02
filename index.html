@@ -45,11 +45,11 @@ Username: u5es2
 	</head>
 	<body onload="setUp();">
 
-		<div class="fixed-top">
+		<div class="d-sm-flex flex-wrap fixed-top">
 			<nav class="navbar fixed-top bg-success">
-			  <a class="nav-item nav-link active" a style="color:white" href="index.html">Home</a>
-			  <a class="nav-item" a style="color:white"><b>Kohonen Self-Organising Maps</b></a>
-			  <a class="nav-item nav-link" a style="color:white" href="about.html">About</a>
+			  <a class="order-1 nav-item nav-link active" a style="color:white" href="index.html">Home</a>
+			  <a class="order-2 align-self-center nav-item" a style="color:white"><b>Kohonen Self-Organising Maps</b></a>
+			  <a class="order-3 nav-item nav-link" a style="color:white" href="about.html">About</a>
 			</nav>
 		</div>
 
@@ -65,7 +65,7 @@ Username: u5es2
 				    <div class="col-lg-8 offset-lg-2">
 				    	<!--<div class="explanation">Kohonen's SOM is a type of artificial neural network that is trained using unsupervised learning to produce a low-dimensional, discretised representation of the input space of the training samples, called a map, and is therefore a method to do dimensionality reduction.</div>-->
 				    	<div class="canvas" id="parentCanvas">
-							<canvas id="myCanvas" width="336" height="336"></canvas>
+							<canvas id="myCanvas" width="336" height="336">Use Google Chrome.</canvas>
 							<!--<canvas id="myCanvas2" width="336" height="336"></canvas>-->
 						</div>
 
@@ -128,10 +128,15 @@ Username: u5es2
 		    </div>
 
 		    <noscript>Your browser does not support JavaScript which is required by Bootstrap 4 for the purposes of this wep-page.</noscript>
+		    <!-- Draw JS -->
 		    <script src="static/js/draw.js" charset="UTF-8"></script>
-		    <!--<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.js"></script>-->
-		    <!--<script src="static/js/particleConfig.js"></script>-->
-		    
+		    <!-- Howler JS -->
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.9/howler.min.js">
+				var sound = new Howl({
+				  src: ['static/sounds/FastDrawing.mp3']
+				});
+				sound.play();
+		    </script>
 		    <!-- jQuery -->
     		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     		<!-- Popper.js -->
