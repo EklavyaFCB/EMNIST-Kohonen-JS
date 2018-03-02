@@ -8,21 +8,26 @@ Username: u5es2
 var drawable; // Boolean press marker
 var info; // Status string
 var ctx; // Canvas var
+
+var offsetL;
+var offsetT;
+
+var xArr = []; // Store x values
+var yArr = []; // Store y values
 var prev_X;
 var prev_Y;
+
 var rows = 28;
 var cols = 28;
 var size = 336; // Width and height of canvas
 var gridOn = true;
-var xArr = []; // Store x values
-var yArr = []; // Store y values
-var parentCanvas;
-var offsetL;
-var offsetT;
+
+var bgOST;
 
 // Functions
 
 function setUp() {
+
   // Elements
   canvas = document.getElementById('myCanvas');
   ctx = canvas.getContext('2d');
@@ -35,6 +40,9 @@ function setUp() {
   drawable = false;
   drawGrid();
   //drawTable();
+
+  audioSetUp();
+  //audioPlay();
 
   /* --- MOUSE EVENTS --- */
   // Mouse button pressed
@@ -115,6 +123,8 @@ function setUp() {
     };
   }
 
+  /* --- SCROLL EVENTS --- */
+
   // Prevent unintended touch scroll
   document.body.addEventListener("touchstart", function (e) {
     if (e.target == canvas) {
@@ -127,7 +137,7 @@ function setUp() {
       e.preventDefault();
     }
   }, false);
-  
+
   document.body.addEventListener("touchmove", function (e) {
     if (e.target == canvas) {
       e.preventDefault();
@@ -136,13 +146,42 @@ function setUp() {
 
 }
 
+// Set up audio
+function audioSetUp() {
+  bgOST = new Howl({
+    src: ['static/sounds/OST/FastDrawing.mp3'],
+    autoplay: false,
+    loop: false,
+    volume: 0.5
+  });
+}
+
+function audioPlay() {
+  // Clear listener after first call.
+  bgOST.once('load', function(){
+    bgOST.play();
+  });
+
+  // Fires when the sound finishes playing.
+  bgOST.on('end', function(){
+    console.log('Finished playing!');
+  });
+}
+
 // Clear canvas
 function clearCanvas(callType) {
   
-  ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+  //ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+  // Apparently the best to clear the canvas is not by 
+  // clearing a rectangle of a certain width and height
+  // but by re-defining the values.
+
+  canvas.width = canvas.width;
   
   if (typeof ctx2 !== 'undefined') {
-    ctx2.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    //ctx2.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    canvas.width = canvas.width;
   }
 
   xArr = [];
