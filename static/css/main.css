@@ -43,7 +43,7 @@ body {
   font-size: 20px;
 
   overflow-x: hidden;
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
   touch-action: pan-down;
 }
 
@@ -148,6 +148,15 @@ b, strong{
 .links {
   padding: 20px;
   text-align: center;
+}
+
+.volControl {
+  padding: 5px;
+  text-align: center;
+}
+
+#volIcon {
+  cursor: pointer;
 }
 
 /* FOOTER */ 

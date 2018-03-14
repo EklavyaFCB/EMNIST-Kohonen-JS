@@ -21,7 +21,8 @@ var rows = 28;
 var cols = 28;
 var size = 336; // Width and height of canvas
 var gridOn = true;
-
+var muted = true;
+var initial = true;
 var bgOST;
 
 // Functions
@@ -30,6 +31,7 @@ function setUp() {
 
   // Elements
   canvas = document.getElementById('myCanvas');
+  volIcon = document.getElementById("volIcon");
   ctx = canvas.getContext('2d');
 
   if (typeof ctx2 !== 'undefined') {
@@ -151,9 +153,10 @@ function audioSetUp() {
   bgOST = new Howl({
     src: ['static/sounds/OST/FastDrawing.mp3'],
     autoplay: false,
-    loop: false,
+    loop: true,
     volume: 0.5
   });
+
 }
 
 function audioPlay() {
@@ -286,4 +289,25 @@ function carry() {
   if (typeof ctx2 !== 'undefined') {
     reDraw();
   }
+}
+
+
+// Change volume icon to mute/unmute
+function changeVol() {
+
+  if (muted) { // Turning sound ON
+    volIcon.src = "static/images/volume/shadow/3.png";
+    if (initial) {
+      bgOST.play();
+      initial = !initial;
+    } else {
+      bgOST.mute(false);
+    }
+    
+  } else { // Turning sound OFF
+    volIcon.src = "static/images/volume/shadow/1.png";
+    bgOST.mute(true);
+  }
+
+  muted = !muted;
 }
