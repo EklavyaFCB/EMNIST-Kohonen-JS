@@ -23,6 +23,14 @@ Username: u5es2
 	    <!-- Slick CSS -->
 	    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/> -->
 
+		<!-- D3.js 
+		<script src="https://d3js.org/d3.v5.min.js"></script>-->
+		<!-- Chart.js -->
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	    <!-- jQuery-->
+	    <!-- integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous" -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 	    <!-- Main CSS -->
 	    <link href="static/css/main.css" rel="stylesheet" type="text/css">
 
@@ -50,9 +58,9 @@ Username: u5es2
 
 		<div class="d-sm-flex flex-wrap fixed-top">
 			<nav class="navbar fixed-top bg-success">
-			  <a class="order-1 nav-item nav-link active" a style="color:white" href="index.html">Home</a>
+			  <a class="order-1 nav-item nav-link active" a style="color:white" href="/">Home</a>
 			  <a class="order-2 align-self-center nav-item" a style="color:white"><b>Kohonen Self-Organising Maps</b></a>
-			  <a class="order-3 nav-item nav-link" a style="color:white" href="about.html">About</a>
+			  <a class="order-3 nav-item nav-link" a style="color:white" href="about">About</a>
 			</nav>
 		</div>
 
@@ -66,14 +74,70 @@ Username: u5es2
 		    <div class="main">
 			    <div class="col-lg-8 offset-lg-2">
 
-					<div class="explanation">
-						<a>Kohonen's</a><br>
-						<a>Self-Organising Maps</a><br>
-						<h6>Playing time: 20 mins • By Eklavya Sarkar</h6>
+			    	<div class="explanation1">Topological Map</div>
+
+					<style>
+						.chart {
+						}
+
+						.main text {
+						    font: 10px sans-serif;	
+						}
+
+						.axis line, .axis path {
+						    shape-rendering: crispEdges;
+						    stroke: black;
+						    fill: none;
+						}
+
+						circle {
+						    fill: steelblue;
+						}
+					</style>
+
+					<div id='chartContent'>
+
 					</div>
 
-					<div class="start">
-						<button type="button" class="btn btn-warning btn-lg"><a href="1.html" style="color:white">Start Learning</a></button>
+		    		<!-- Plot.js -->
+		    		<script type="text/javascript" charset="UTF-8">
+						var dataPoints = [];
+						 
+						function getDataPointsFromCSV(csv) {
+						    var dataPoints = csvLines = points = [];
+						    csvLines = csv.split(/[\r?\n|\r|\n]+/);
+						        
+						    for (var i = 0; i < csvLines.length; i++)
+						        if (csvLines[i].length > 0) {
+						            points = csvLines[i].split(",");
+						            dataPoints.push({ 
+						                x: parseFloat(points[0]), 
+						                y: parseFloat(points[1]) 		
+							    });
+							}
+						    return dataPoints;
+						}
+							 
+						$.get("http://cgi.csc.liv.ac.uk/~u5es2/EMNIST/coordinates.csv", function(data) {
+						    var chart = new CanvasJS.Chart("chartContainer", {
+						        title: {
+							    text: "Chart from CSV",
+						        },
+						        data: [{
+							    type: "line",
+							    dataPoints: getDataPointsFromCSV(data)
+							}]
+						    });
+								
+						    chart.render();
+						 
+						});
+		    		</script>
+
+					<div id="reactiveInfo">
+						<form id="setupForm" style="text-align:center;">
+							<a class="btn btn-outline-danger btn-sm" href="#" role="button">Next</a>
+						</form>
 					</div>
 
 				</div>
@@ -87,7 +151,7 @@ Username: u5es2
 
 		    <div class="footer">
 				<div class="volControl">
-		  			<img src="static/images/volume/shadow/1.png" id="volIcon" height="50" width="50" alt="Mute Volume" onclick="changeVol()">
+		  			<img class="img-circle" src="static/images/volume/shadow/1.png" id="volIcon" height="50" width="50" alt="Mute Volume" onclick="changeVol()">
 				</div>
 		    	<div class="fixed-bottom">
 					<div class="progress">
@@ -105,8 +169,6 @@ Username: u5es2
 		    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.9/howler.min.js" type="text/javascript"></script>
 		    <!-- Draw.js -->
 		    <script src="static/js/draw.js" type="text/javascript" charset="UTF-8"></script>
-		    <!-- jQuery -->
-    		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     		<!-- Slick.js -->
     		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" type="text/javascript"></script> -->
     		<!-- Slides.js -->

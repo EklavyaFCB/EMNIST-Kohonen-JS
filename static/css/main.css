@@ -42,9 +42,18 @@ body {
   font-style:normal;
   font-size: 20px;
 
+  opacity: 1;
+  transition: 1s opacity;
+
   overflow-x: hidden;
-  /*overflow-y: hidden;*/
+  overflow-y: hidden;
   touch-action: pan-down;
+}
+
+
+body.fade-out {
+    opacity: 0;
+    transition: none;
 }
 
 /* fake bold */
@@ -109,7 +118,23 @@ b, strong{
 
 .explanation {
   text-align: center;
-  padding-bottom: 20px;
+  padding-top: 200px;
+  padding-bottom: 50px;
+  font-size: 55px;
+}
+
+.explanation1 {
+  text-align: center;
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-top: 200px;
+  padding-bottom: 50px;
+  font-size: 25px;
+}
+
+.boxes {  
+  padding-top: 150px;
+  text-align: center;
 }
 
 .canvas {
@@ -150,9 +175,17 @@ b, strong{
   text-align: center;
 }
 
-.volControl {
-  padding: 5px;
+.start {
+  padding: 10px;
   text-align: center;
+}
+
+.volControl {
+  position: sticky;
+  padding-bottom: 50px;
+  padding-right: 50px;
+  text-align: right;
+  border-radius: 50%;
 }
 
 #volIcon {
@@ -169,16 +202,15 @@ b, strong{
   padding: 30px 0;
   font-size: 25px;*/
   /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);*/
-/*}
+/*}*/
 
 .credits {
-  float: left;
   font-size: 20px;
 }
 
 .credits a {
   color: white;
-}*/
+}
 
 .footer {
   position: absolute;

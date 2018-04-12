@@ -46,7 +46,7 @@ Username: u5es2
 
 		<title>Kohonen SOM</title>
 	</head>
-	<body onload="setUp();">
+	<body onload="setUp(); setUpCanvas()">
 
 		<div class="d-sm-flex flex-wrap fixed-top">
 			<nav class="navbar fixed-top bg-success">
@@ -66,14 +66,29 @@ Username: u5es2
 		    <div class="main">
 			    <div class="col-lg-8 offset-lg-2">
 
-					<div class="explanation">
-						<a>Kohonen's</a><br>
-						<a>Self-Organising Maps</a><br>
-						<h6>Playing time: 20 mins • By Eklavya Sarkar</h6>
+			    	<!--<div class="explanation">Kohonen's SOM is a type of artificial neural network that is trained using unsupervised learning to produce a low-dimensional, discretised representation of the input space of the training samples, called a map, and is therefore a method to do dimensionality reduction.</div>-->
+			    	<div class="canvas" id="parentCanvas">
+						<canvas id="myCanvas" width="336" height="336">Use Google Chrome.</canvas>
+						<!--<canvas id="myCanvas2" width="336" height="336"></canvas>-->
 					</div>
 
-					<div class="start">
-						<button type="button" class="btn btn-warning btn-lg"><a href="1.html" style="color:white">Start Learning</a></button>
+					<div class="guide">
+						<a id="status">Draw in the box above</a>
+					</div>
+
+					<div id="reactiveInfo">
+						<form id="setupForm" style="text-align:center;">
+							<input type="button" class="btn btn-outline-info btn-sm" value="Grid" onclick="drawGrid()">
+							<input type="button" class="btn btn-outline-success btn-sm" value="Carry" onclick="carry()">
+							<input type="button" class="btn btn-outline-warning btn-sm" value="Clear" onclick="clearCanvas(0)"> 
+							<a class="btn btn-outline-danger btn-sm" href="3.html" role="button">Next</a>
+						</form>
+					</div>
+
+					<div class="links">
+						<button type="button" class="btn btn-info btn-lg">View Examples</button>
+						<button type="button" class="btn btn-success btn-lg">Learn More</button>
+						<button type="button" class="btn btn-warning btn-lg"><a style="color:white" href="dataset.html">View Dataset</a></button>
 					</div>
 
 				</div>
@@ -87,7 +102,7 @@ Username: u5es2
 
 		    <div class="footer">
 				<div class="volControl">
-		  			<img src="static/images/volume/shadow/1.png" id="volIcon" height="50" width="50" alt="Mute Volume" onclick="changeVol()">
+		  			<img class="img-circle" src="static/images/volume/shadow/1.png" id="volIcon" height="50" width="50" alt="Mute Volume" onclick="changeVol()">
 				</div>
 		    	<div class="fixed-bottom">
 					<div class="progress">
